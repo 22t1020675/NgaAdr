@@ -33,8 +33,7 @@ class _CountdownHomeState extends State<CountdownHome> {
   Timer? _timer;
   int seconds = 0;
   bool isRunning = false;
-  bool _dialogShown = false; // ⭐ tránh hiện lại dialog
-
+  bool _dialogShown = false;
   void startTimer() {
     if (timeController.text.isEmpty) return;
 
@@ -66,7 +65,7 @@ class _CountdownHomeState extends State<CountdownHome> {
               actions: [
                 TextButton(
                   onPressed: () {
-                    Navigator.of(dialogContext).pop(); // ✅ FIX
+                    Navigator.of(dialogContext).pop();
                   },
                   child: const Text("OK"),
                 ),
@@ -114,7 +113,10 @@ class _CountdownHomeState extends State<CountdownHome> {
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
           child: Column(
             children: [
-              const Text("Nhập số giây cần đếm", style: TextStyle(fontSize: 18)),
+              const Text(
+                "Nhập số giây cần đếm",
+                style: TextStyle(fontSize: 18),
+              ),
               const SizedBox(height: 12),
               SizedBox(
                 width: 140,

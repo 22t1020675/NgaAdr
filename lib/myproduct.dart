@@ -41,8 +41,6 @@ class _MyProductState extends State<MyProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xfff2f2f2),
-
-      // ================= APP BAR =================
       appBar: AppBar(
         backgroundColor: Colors.amber,
         elevation: 0,
@@ -94,12 +92,8 @@ class _MyProductState extends State<MyProduct> {
           ),
         ],
       ),
-
-      // ================= BODY =================
       body: isLoading
-          ? const Center(
-              child: CircularProgressIndicator(color: Colors.amber),
-            )
+          ? const Center(child: CircularProgressIndicator(color: Colors.amber))
           : LayoutBuilder(
               builder: (context, constraints) {
                 final double width = constraints.maxWidth;
@@ -107,28 +101,24 @@ class _MyProductState extends State<MyProduct> {
                 final int crossAxisCount = width < 360
                     ? 1
                     : width < 600
-                        ? 2
-                        : width < 1100
-                            ? 3
-                            : 4;
-
-                // 👉 tăng chiều cao item cho mobile để không overflow
+                    ? 2
+                    : width < 1100
+                    ? 3
+                    : 4;
                 final double aspectRatio = width < 360
                     ? 0.6
                     : width < 600
-                        ? 0.65
-                        : width < 1100
-                            ? 0.75
-                            : 0.8;
-
+                    ? 0.65
+                    : width < 1100
+                    ? 0.75
+                    : 0.8;
                 return Center(
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 1200),
                     child: GridView.builder(
                       padding: const EdgeInsets.all(8),
                       itemCount: list.length,
-                      gridDelegate:
-                          SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: crossAxisCount,
                         childAspectRatio: aspectRatio,
                         crossAxisSpacing: 8,
@@ -140,8 +130,6 @@ class _MyProductState extends State<MyProduct> {
                 );
               },
             ),
-
-      // ================= BOTTOM NAV =================
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _bottomIndex,
         onTap: (i) => setState(() => _bottomIndex = i),
@@ -162,7 +150,6 @@ class _MyProductState extends State<MyProduct> {
     );
   }
 
-  // ================= PRODUCT ITEM =================
   Widget _productItem(Product p) {
     final bool isFreeShip = p.price >= 20;
 
@@ -180,9 +167,8 @@ class _MyProductState extends State<MyProduct> {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min, // ⭐ tránh overflow
+        mainAxisSize: MainAxisSize.min,
         children: [
-          // IMAGE
           SizedBox(
             height: 140,
             child: Stack(
@@ -190,10 +176,7 @@ class _MyProductState extends State<MyProduct> {
                 Padding(
                   padding: const EdgeInsets.all(8),
                   child: Center(
-                    child: Image.network(
-                      p.image,
-                      fit: BoxFit.contain,
-                    ),
+                    child: Image.network(p.image, fit: BoxFit.contain),
                   ),
                 ),
                 Positioned(
@@ -221,8 +204,6 @@ class _MyProductState extends State<MyProduct> {
               ],
             ),
           ),
-
-          // TITLE
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Text(
@@ -236,15 +217,12 @@ class _MyProductState extends State<MyProduct> {
               ),
             ),
           ),
-
-          // FREESHIP
           if (isFreeShip)
             Padding(
               padding: const EdgeInsets.only(left: 8, top: 4),
               child: Row(
                 children: const [
-                  Icon(Icons.local_shipping,
-                      size: 14, color: Colors.green),
+                  Icon(Icons.local_shipping, size: 14, color: Colors.green),
                   SizedBox(width: 4),
                   Text(
                     "Freeship",
@@ -259,32 +237,22 @@ class _MyProductState extends State<MyProduct> {
             ),
 
           const SizedBox(height: 6),
-
-          // RATING
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Row(
               children: [
                 const Icon(Icons.star, size: 13, color: Colors.orange),
-                Text(
-                  " ${p.rating}",
-                  style: const TextStyle(fontSize: 12),
-                ),
+                Text(" ${p.rating}", style: const TextStyle(fontSize: 12)),
                 const Spacer(),
                 Text(
                   "Đã bán ${p.count}",
-                  style: const TextStyle(
-                    fontSize: 11,
-                    color: Colors.grey,
-                  ),
+                  style: const TextStyle(fontSize: 11, color: Colors.grey),
                 ),
               ],
             ),
           ),
 
           const SizedBox(height: 6),
-
-          // PRICE
           Padding(
             padding: const EdgeInsets.all(8),
             child: Row(
